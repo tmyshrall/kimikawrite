@@ -145,3 +145,15 @@ a { color: inherit; text-decoration: underline; }
   color: #666;
   font-size: 0.95rem;
 }
+
+.status.ongoing {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: #eef4ea;
+  color: #3a6b2a;
+}
