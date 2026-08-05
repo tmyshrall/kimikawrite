@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Reading Room</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">A small library of ongoing stories</p>
+        <h1 class="site-title">The Reading <span class="accent">Room</span></h1>
+      </div>
+    </header>
+
+    <ul class="ledger" id="ledger"></ul>
+    <p class="empty-state" id="empty-state" style="display:none;">
+      No stories yet. Add one in <code>js/data.js</code>.
+    </p>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script>
+    const ledger = document.getElementById('ledger');
+    const emptyState = document.getElementById('empty-state');
+
+    if (!STORIES.length) {
+      emptyState.style.display = 'block';
+    } else {
+      STORIES.forEach(story => {
+        const count = story.chapters.length;
+        const li = document.createElement('li');
+        li.className = 'ledger-row';
+
+        // Build spine ticks scaled to chapter count (caps visual height, never the count)
+        const maxTicks = 24;
+        const tickCount = Math.min(count, maxTicks);
+        let ticks = '';
+        for (let i = 0; i < tickCount; i++) {
+          const h = 14 + Math.round(20 * (i / Math.max(tickCount - 1, 1)));
+          ticks += `<i style="height:${h}px"></i>`;
+        }
+
+        li.innerHTML = `
+          <div>
+            <a class="story-link" href="story.html?s=${encodeURIComponent(story.slug)}">${story.title}</a>
+            <div class="story-blurb">${story.blurb || ''}</div>
+          </div>
+          <div>
+            <div class="spine">${ticks}</div>
+            <span class="spine-count">${count} ${count === 1 ? 'chapter' : 'chapters'}</span>
+          </div>
+        `;
+        ledger.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
