@@ -3,22 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Reading Room</title>
+<title>Kimika's Story</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="wrap">
-    <header class="site-header">
-      <div>
-        <p class="eyebrow">A small library of ongoing stories</p>
-        <h1 class="site-title">The Reading <span class="accent">Room</span></h1>
-      </div>
-    </header>
+    <div class="box">
+      <header class="site-header">
+        <h1 class="site-title">Kimika's Story</h1>
+      </header>
 
-    <ul class="ledger" id="ledger"></ul>
-    <p class="empty-state" id="empty-state" style="display:none;">
-      No stories yet. Add one in <code>js/data.js</code>.
-    </p>
+      <ul class="ledger" id="ledger"></ul>
+      <p class="empty-state" id="empty-state" style="display:none;">
+        No stories yet. Add one in <code>js/data.js</code>.
+      </p>
+    </div>
   </div>
 
   <script src="js/data.js"></script>
@@ -33,25 +32,9 @@
         const count = story.chapters.length;
         const li = document.createElement('li');
         li.className = 'ledger-row';
-
-        // Build spine ticks scaled to chapter count (caps visual height, never the count)
-        const maxTicks = 24;
-        const tickCount = Math.min(count, maxTicks);
-        let ticks = '';
-        for (let i = 0; i < tickCount; i++) {
-          const h = 14 + Math.round(20 * (i / Math.max(tickCount - 1, 1)));
-          ticks += `<i style="height:${h}px"></i>`;
-        }
-
         li.innerHTML = `
-          <div>
-            <a class="story-link" href="story.html?s=${encodeURIComponent(story.slug)}">${story.title}</a>
-            <div class="story-blurb">${story.blurb || ''}</div>
-          </div>
-          <div>
-            <div class="spine">${ticks}</div>
-            <span class="spine-count">${count} ${count === 1 ? 'chapter' : 'chapters'}</span>
-          </div>
+          <a class="story-link" href="story.html?s=${encodeURIComponent(story.slug)}">${story.title}</a>
+          <span class="chapter-count">${count} ${count === 1 ? 'chapter' : 'chapters'}</span>
         `;
         ledger.appendChild(li);
       });

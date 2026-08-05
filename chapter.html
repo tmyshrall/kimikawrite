@@ -3,27 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter — The Reading Room</title>
+<title>Chapter — Kimika's Story</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="chapter-scene">
-    <nav class="chapter-nav-top">
-      <a class="back-link" id="story-back-link" href="index.html">&larr; <span id="story-back-label">Back</span></a>
-      <a class="back-link" href="index.html">All stories</a>
-    </nav>
+  <div class="wrap">
+    <div class="box">
+      <header class="site-header">
+        <a class="back-link" id="story-back-link" href="index.html">&larr; <span id="story-back-label">Back</span></a>
+      </header>
 
-    <article class="page">
-      <p class="page-eyebrow" id="story-name">The Reading Room</p>
-      <h1 class="page-title" id="chapter-title">Loading…</h1>
+      <h1 class="chapter-title" id="chapter-title">Loading…</h1>
       <div class="chapter-body" id="chapter-body">
-        <p class="loading">Fetching the page…</p>
+        <p class="loading">Loading…</p>
       </div>
-    </article>
+    </div>
 
-    <nav class="chapter-nav-bottom">
+    <nav class="chapter-nav">
       <a class="nav-btn" id="prev-btn" href="#">&larr; Previous chapter</a>
-      <a class="nav-btn next" id="next-btn" href="#">Next chapter &rarr;</a>
+      <a class="nav-btn" id="next-btn" href="#">Next chapter &rarr;</a>
     </nav>
   </div>
 
@@ -36,7 +34,6 @@
 
     const storyBackLink = document.getElementById('story-back-link');
     const storyBackLabel = document.getElementById('story-back-label');
-    const storyNameEl = document.getElementById('story-name');
     const titleEl = document.getElementById('chapter-title');
     const bodyEl = document.getElementById('chapter-body');
     const prevBtn = document.getElementById('prev-btn');
@@ -53,13 +50,12 @@
 
     if (!story || !story.chapters[idx]) {
       titleEl.textContent = 'Chapter not found';
-      bodyEl.innerHTML = `<p>That chapter doesn't exist. <a href="index.html" style="color:var(--rust)">Return to the library</a>.</p>`;
+      bodyEl.innerHTML = `<p>That chapter doesn't exist. <a href="index.html">Return home</a>.</p>`;
       prevBtn.classList.add('disabled');
       nextBtn.classList.add('disabled');
     } else {
       const chapter = story.chapters[idx];
       document.title = `${chapter.title} — ${story.title}`;
-      storyNameEl.textContent = story.title;
       titleEl.textContent = chapter.title;
       storyBackLink.href = `story.html?s=${encodeURIComponent(story.slug)}`;
       storyBackLabel.textContent = story.title;
@@ -91,10 +87,8 @@
         .catch(err => {
           bodyEl.innerHTML = `
             <p>Couldn't load this chapter's text.</p>
-            <p style="font-family: var(--font-ui); font-size: 0.85rem; color: var(--rust);">
-              Looking for a file at <code>${path}</code> — make sure it exists, and that
-              you're viewing this site through a local server rather than opening the
-              file directly (see the README).
+            <p style="font-size: 0.85rem; color: #b33;">
+              Looking for a file at <code>${path}</code> — make sure it exists.
             </p>`;
         });
     }

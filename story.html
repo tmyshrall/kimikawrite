@@ -3,25 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Story — The Reading Room</title>
+<title>Story — Kimika's Story</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="wrap">
-    <header class="site-header">
-      <div>
-        <p class="eyebrow" id="eyebrow">Story</p>
+    <div class="box">
+      <header class="site-header">
         <h1 class="site-title" id="story-title">Loading…</h1>
-      </div>
-      <a class="back-link" href="index.html">&larr; All stories</a>
-    </header>
+        <a class="back-link" href="index.html">&larr; All stories</a>
+      </header>
 
-    <p class="story-blurb-lead" id="story-blurb"></p>
-
-    <ol class="chapter-list" id="chapter-list"></ol>
-    <p class="empty-state" id="empty-state" style="display:none;">
-      Story not found. <a href="index.html" style="color:var(--brass-bright)">Go back home</a>.
-    </p>
+      <ol class="chapter-list" id="chapter-list"></ol>
+      <p class="empty-state" id="empty-state" style="display:none;">
+        Story not found. <a href="index.html">Go back home</a>.
+      </p>
+    </div>
   </div>
 
   <script src="js/data.js"></script>
@@ -31,7 +28,6 @@
     const story = STORIES.find(s => s.slug === slug);
 
     const titleEl = document.getElementById('story-title');
-    const blurbEl = document.getElementById('story-blurb');
     const listEl = document.getElementById('chapter-list');
     const emptyState = document.getElementById('empty-state');
 
@@ -39,9 +35,8 @@
       titleEl.textContent = 'Not found';
       emptyState.style.display = 'block';
     } else {
-      document.title = story.title + ' — The Reading Room';
+      document.title = story.title + ' — Kimika\'s Story';
       titleEl.textContent = story.title;
-      blurbEl.textContent = story.blurb || '';
 
       story.chapters.forEach((chapter, i) => {
         const li = document.createElement('li');
