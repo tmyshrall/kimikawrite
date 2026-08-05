@@ -32,9 +32,13 @@
         const count = story.chapters.length;
         const li = document.createElement('li');
         li.className = 'ledger-row';
+        const ongoingTag = story.status === 'ongoing' ? '<span class="status ongoing">Ongoing</span>' : '';
         li.innerHTML = `
           <a class="story-link" href="story.html?s=${encodeURIComponent(story.slug)}">${story.title}</a>
-          <span class="chapter-count">${count} ${count === 1 ? 'chapter' : 'chapters'}</span>
+          <span class="chapter-count">
+            ${count} ${count === 1 ? 'chapter' : 'chapters'}
+            ${ongoingTag}
+          </span>
         `;
         ledger.appendChild(li);
       });
