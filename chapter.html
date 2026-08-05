@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter — Kimika's Story</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="box">
+      <header class="site-header">
+        <a class="back-link" id="story-back-link" href="index.html">&larr; <span id="story-back-label">Back</span></a>
+      </header>
+
+      <h1 class="chapter-title" id="chapter-title">Loading…</h1>
+      <div class="chapter-body" id="chapter-body">
+        <p class="loading">Loading…</p>
+      </div>
+    </div>
+
+    <nav class="chapter-nav">
+      <a class="nav-btn" id="prev-btn" href="#">&larr; Previous chapter</a>
+      <a class="nav-btn" id="next-btn" href="#">Next chapter &rarr;</a>
+    </nav>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('s');
+    const idx = parseInt(params.get('c'), 10);
+    const story = STORIES.find(s => s.slug === slug);
+
+    const storyBackLink = document.getElementById('story-back-link');
+    const storyBackLabel = document.getElementById('story-back-label');
+    const titleEl = document.getElementById('chapter-title');
+    const bodyEl = document.getElementById('chapter-body');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function setNav(btn, targetIdx) {
+      if (!story || targetIdx < 0 || targetIdx >= story.chapters.length) {
+        btn.classList.add('disabled');
+        btn.href = '#';
+      } else {
+        btn.href = `chapter.html?s=${encodeURIComponent(story.slug)}&c=${targetIdx}`;
+      }
+    }
+
+    if (!story || !story.chapters[idx]) {
+      titleEl.textContent = 'Chapter not found';
+      bodyEl.innerHTML = `<p>That chapter doesn't exist. <a href="index.html">Return home</a>.</p>`;
+      prevBtn.classList.add('disabled');
+      nextBtn.classList.add('disabled');
+    } else {
+      const chapter = story.chapters[idx];
+      document.title = `${chapter.title} — ${story.title}`;
+      titleEl.textContent = chapter.title;
+      storyBackLink.href = `story.html?s=${encodeURIComponent(story.slug)}`;
+      storyBackLabel.textContent = story.title;
+
+      setNav(prevBtn, idx - 1);
+      setNav(nextBtn, idx + 1);
+
+      const path = `content/${story.slug}/${chapter.file}`;
+      fetch(path)
+        .then(res => {
+          if (!res.ok) throw new Error('File not found: ' + path);
+          return res.text();
+        })
+        .then(text => {
+          const paragraphs = text
+            .split(/\r?\n\s*\r?\n/)
+            .map(p => p.trim())
+            .filter(Boolean);
+
+          if (!paragraphs.length) {
+            bodyEl.innerHTML = `<p>This chapter's text file is empty.</p>`;
+            return;
+          }
+
+          bodyEl.innerHTML = paragraphs
+            .map(p => `<p>${p.replace(/\n/g, ' ')}</p>`)
+            .join('');
+        })
+        .catch(err => {
+          bodyEl.innerHTML = `
+            <p>Couldn't load this chapter's text.</p>
+            <p style="font-size: 0.85rem; color: #b33;">
+              Looking for a file at <code>${path}</code> — make sure it exists.
+            </p>`;
+        });
+    }
+  </script>
+</body>
+</html>

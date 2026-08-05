@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimika's Story</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="box">
+      <header class="site-header">
+        <h1 class="site-title">Kimika's Story</h1>
+      </header>
+
+      <ul class="ledger" id="ledger"></ul>
+      <p class="empty-state" id="empty-state" style="display:none;">
+        No stories yet. Add one in <code>js/data.js</code>.
+      </p>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script>
+    const ledger = document.getElementById('ledger');
+    const emptyState = document.getElementById('empty-state');
+
+    if (!STORIES.length) {
+      emptyState.style.display = 'block';
+    } else {
+      STORIES.forEach(story => {
+        const count = story.chapters.length;
+        const li = document.createElement('li');
+        li.className = 'ledger-row';
+        li.innerHTML = `
+          <a class="story-link" href="story.html?s=${encodeURIComponent(story.slug)}">${story.title}</a>
+          <span class="chapter-count">${count} ${count === 1 ? 'chapter' : 'chapters'}</span>
+        `;
+        ledger.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
