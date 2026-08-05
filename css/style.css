@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Libre+Franklin:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --ink: #16211b;
+  --ink-soft: #1f2e25;
+  --parchment: #ede3ce;
+  --parchment-dim: #e2d6ba;
+  --brass: #b6903f;
+  --brass-bright: #d4ad5c;
+  --rust: #8a4a32;
+  --cream: #f4efe2;
+  --muted: #93a394;
+  --line: rgba(244, 239, 226, 0.14);
+
+  --font-display: 'Fraunces', serif;
+  --font-ui: 'Libre Franklin', sans-serif;
+  --font-read: 'Lora', serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--cream);
+}
+
+.site-title .accent {
+  color: var(--brass-bright);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0 0 0.4rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.back-link:hover { color: var(--brass-bright); border-color: var(--brass-bright); }
+
+/* ---------- Index: story ledger ---------- */
+
+.ledger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ledger-row:first-child { padding-top: 0; }
+
+.story-link {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--cream);
+  transition: color 0.15s ease;
+}
+.story-link:hover { color: var(--brass-bright); }
+
+.story-blurb {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.35rem;
+  max-width: 46ch;
+  line-height: 1.5;
+}
+
+/* Signature element: chapter count rendered as book "spine ticks" */
+.spine {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 34px;
+}
+
+.spine i {
+  display: block;
+  width: 4px;
+  background: linear-gradient(to top, var(--brass), var(--brass-bright));
+  border-radius: 1px;
+  opacity: 0.9;
+}
+
+.spine-count {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ---------- Story page: chapter list ---------- */
+
+.story-blurb-lead {
+  font-family: var(--font-read);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 56ch;
+  margin: -1.75rem 0 3rem;
+  line-height: 1.6;
+}
+
+.chapter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: chapter;
+}
+
+.chapter-row {
+  border-bottom: 1px solid var(--line);
+}
+
+.chapter-row:first-child .chapter-link { padding-top: 0; }
+
+.chapter-link {
+  counter-increment: chapter;
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  padding: 1.15rem 0;
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  color: var(--parchment);
+  transition: color 0.15s ease, padding-left 0.15s ease;
+}
+
+.chapter-link::before {
+  content: counter(chapter, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--brass);
+  flex-shrink: 0;
+  width: 2ch;
+}
+
+.chapter-link:hover {
+  color: var(--brass-bright);
+  padding-left: 0.4rem;
+}
+
+/* ---------- Chapter reading page ---------- */
+
+.chapter-scene {
+  min-height: 100vh;
+  padding: 3.5rem 1.25rem 5rem;
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse at top, rgba(182, 144, 63, 0.10), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.10) 0px, rgba(0,0,0,0.10) 1px, transparent 1px, transparent 3px),
+    linear-gradient(180deg, #101a15 0%, #16211b 45%, #101a15 100%);
+  position: relative;
+}
+
+/* If you'd rather use a real photo, drop an image at assets/chapter-bg.jpg
+   and uncomment the line below (keep the dark gradient above it for contrast) */
+/* .chapter-scene { background-image: linear-gradient(180deg, rgba(16,26,21,0.82), rgba(16,26,21,0.9)), url('../assets/chapter-bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed; } */
+
+.chapter-nav-top {
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-ui);
+}
+
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--parchment);
+  color: #241d12;
+  border-radius: 4px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45), 0 2px 0 rgba(255,255,255,0.08) inset;
+  padding: clamp(2.2rem, 5vw, 4.5rem);
+}
+
+.page-eyebrow {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: var(--rust);
+  margin: 0 0 0.6rem;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3.6vw, 2.3rem);
+  margin: 0 0 2.2rem;
+  color: #201a10;
+  border-bottom: 1px solid rgba(36,29,18,0.15);
+  padding-bottom: 1.6rem;
+}
+
+.chapter-body {
+  font-family: var(--font-read);
+  font-size: 1.13rem;
+  line-height: 1.85;
+}
+
+.chapter-body p {
+  margin: 0 0 1.3rem;
+}
+
+.chapter-body p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: 600;
+  float: left;
+  line-height: 0.85;
+  padding: 0.06em 0.08em 0 0;
+  color: var(--rust);
+}
+
+.chapter-nav-bottom {
+  max-width: 680px;
+  margin: 2.5rem auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-ui);
+}
+
+.nav-btn {
+  border: 1px solid var(--line);
+  padding: 0.7rem 1.1rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  color: var(--parchment);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.nav-btn:hover { border-color: var(--brass-bright); color: var(--brass-bright); }
+.nav-btn.disabled { opacity: 0.3; pointer-events: none; }
+.nav-btn.next { margin-left: auto; }
+
+.loading, .empty-state {
+  font-family: var(--font-ui);
+  color: var(--muted);
+  font-size: 0.95rem;
+  padding: 2rem 0;
+}
+
+.empty-state {
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .ledger-row { grid-template-columns: 1fr; row-gap: 0.75rem; }
+  .spine { justify-content: flex-start; }
+  .spine-count { text-align: left; }
+}
