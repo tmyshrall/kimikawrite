@@ -12,7 +12,7 @@ body {
   /* Background image: fixed so it stays still while the page scrolls,
      with a light white wash over it. Put your image at imgs/background.png */
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
     url('../imgs/background.jpg');
   background-size: cover;
   background-position: center;
