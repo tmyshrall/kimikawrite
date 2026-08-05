@@ -31,23 +31,11 @@
 
 const STORIES = [
   {
-    slug: "wells-of-thane",
-    title: "The Wells of Thane",
+    slug: "nerina-eternal-its-a-wonderful-life",
+    title: "Nerina Eternal It's a Wonderful Life",
     status: "ongoing",
-    blurb: "A dry-country mystery about the town that ran out of water, and the well-diggers who won't say why.",
     chapters: [
-      { title: "Chapter 1: The Last Bucket", file: "01-the-last-bucket.txt" },
-      { title: "Chapter 2: Crossing the Fen", file: "02-crossing-the-fen.txt" },
-      { title: "Chapter 3: The Diggers' Ledger", file: "03-the-diggers-ledger.txt" },
-    ],
-  },
-  {
-    slug: "the-last-lighthouse",
-    title: "The Last Lighthouse",
-    blurb: "The final keeper of a coastline nobody sails anymore, and the light that won't go out.",
-    chapters: [
-      { title: "Chapter 1: The Handover", file: "01-the-handover.txt" },
-      { title: "Chapter 2: Static on the Radio", file: "02-static-on-the-radio.txt" },
+      { title: "Chapter 1: To The Place Called Home", file: "01-to-the-place-called-home.txt" },
     ],
   },
 ];
