@@ -33,7 +33,7 @@ const STORIES = [
   {
     slug: "wells-of-thane",
     title: "The Wells of Thane",
-    status: "ongoing",
+    status: "ongoing"
     blurb: "A dry-country mystery about the town that ran out of water, and the well-diggers who won't say why.",
     chapters: [
       { title: "Chapter 1: The Last Bucket", file: "01-the-last-bucket.txt" },
