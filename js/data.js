@@ -48,4 +48,12 @@ const STORIES = [
       { title: "Chapter 14: A Wonderful Life", file: "14-a-wonderful-life.txt" },
     ],
   },
+  {
+    slug: "through-the-looking-crystal",
+    title: "Through the Looking Crystal",
+    status: "ongoing",
+    chapters: [
+      {title: "Chapter 1: A New Start", file: "01-a-new-start.txt"},
+    ],
+  }
 ];
