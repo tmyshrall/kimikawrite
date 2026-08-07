@@ -31,7 +31,6 @@ const STORIES = [
   {
     slug: "nerina-eternal-its-a-wonderful-life",
     title: "Nerina Eternal It's a Wonderful Life",
-    status: "ongoing",
     chapters: [
       { title: "Chapter 1: To The Place Called Home", file: "01-to-the-place-called-home.txt" },
       { title: "Chapter 2: The Student Council President", file: "02-the-student-council-president.txt" },
