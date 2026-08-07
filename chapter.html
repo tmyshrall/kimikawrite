@@ -72,7 +72,7 @@
         })
         .then(text => {
           const paragraphs = text
-            .split(/\r?\n\s*\r?\n/)
+            .split(/\r?\n/)
             .map(p => p.trim())
             .filter(Boolean);
 
